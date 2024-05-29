@@ -28,9 +28,13 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING(50), // Cambiado a STRING en lugar de INTEGER
       },
-      fk_estudiante: { // Cambiado de "fk_estudiante" a "fk_carrera"
+      fk_empresa: { // Cambiado de "fk_estudiante" a "fk_carrera"
         allowNull: false,
         type: DataTypes.INTEGER,
+        references: {
+          model:"empresas",
+          key: "id",
+        },
       },
     },
     {
@@ -48,9 +52,9 @@ module.exports = (sequelize, DataTypes) => {
 
   Usuario.associate = function (models) { // Cambiado a Usuario en lugar de Estudiante
     // Estableciendo la asociación entre Usuario y Carrera
-    models.Usuario.belongsTo(models.Carrera, { // Cambiado a models.Carrera
-      foreignKey: "fk_carrera",
-      as: "carrera", // Cambiado a "carrera" para reflejar la asociación correcta
+    models.Usuario.belongsTo(models.empresas, { // Cambiado a models.Carrera
+      foreignKey: "fk_empresas",
+      as: "empresas", // Cambiado a "carrera" para reflejar la asociación correcta
     });
   };
 
